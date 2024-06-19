@@ -1,21 +1,27 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da Velha</title>
     <link href="jogodavelha.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div id="board">
-      <!-- criar 9 casinhas -->
-      <div class="casinha"></div>
-      <div class="casinha gray"></div>
-      <div class="casinha"></div>
-      <div class="casinha gray"></div>
-      <div class="casinha"></div>
-      <div class="casinha gray"></div>
-      <div class="casinha"></div>
-      <div class="casinha gray"></div>
-      <div class="casinha"></div>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Jogo da Velha</h1>
+        <div id="board">
+            <div id="cell0" class="casinha"></div>
+            <div id="cell1" class="casinha"></div>
+            <div id="cell2" class="casinha"></div>
+            <div id="cell3" class="casinha"></div>
+            <div id="cell4" class="casinha"></div>
+            <div id="cell5" class="casinha"></div>
+            <div id="cell6" class="casinha"></div>
+            <div id="cell7" class="casinha"></div>
+            <div id="cell8" class="casinha"></div>
+        </div>
+        <div id="vencedor"></div>
+        <button id="resetButton">Reiniciar Jogo</button>
     </div>
-    <div id="vencedor"></div>
     <script type="text/javascript" src="jogodavelha.js"></script>
-    </body>
+</body>
 </html>

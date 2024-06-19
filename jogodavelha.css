@@ -1,21 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+#game-container {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
 #board {
-    border: thin solid rgb(22, 3, 143);
-    width: 420px;
-    height: 420px;
-    overflow: hidden;
-  }
-  
-  .casinha {
-    width: 135px;
-    height: 135px;
-    border: thin solid;
-    float: left;
-    text-align:center;
-    line-height: 135px;
-    font-size:80px;
-  }
-  
-  .gray {
-    background: rgb(130, 17, 178);
-    color: #bb9611;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.casinha {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  background-color: #ffffff;
+  border: 2px solid #343a40;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.casinha:hover {
+  background-color: #f1f3f5;
+}
+
+#vencedor {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #28a745;
+}
+
+#resetButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#resetButton:hover {
+  background-color: #0056b3;
+}

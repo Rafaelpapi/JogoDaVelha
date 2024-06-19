@@ -1,58 +1,61 @@
-const board = document.getElementById("board")
-const casinhas = board.getElementsByTagName("div")
-const boxVencedor = document.getElementById("vencedor")
+const board = document.getElementById("board");
+const casinhas = document.getElementsByClassName("casinha");
+const boxVencedor = document.getElementById("vencedor");
+const resetButton = document.getElementById("resetButton");
 
 let jogadas = 0;
+let gameOver = false;
 
-for (let i=0; i<casinhas.length; i++) {
-  console.log(casinhas[i])
-  casinhas[i].addEventListener('click', casinhaclick)
+for (let i = 0; i < casinhas.length; i++) {
+  casinhas[i].addEventListener('click', casinhaclick);
 }
 
+resetButton.addEventListener('click', resetGame);
+
 function casinhaclick() {
-    if(this.innerHTML == "") {
-        if(jogadas%2 == 0) {
-            this.innerHTML = "X";
-        }else{
-            this.innerHTML = "O";
-        }
-        jogadas +=1;    
+    if (this.innerHTML === "" && !gameOver) {
+        this.innerHTML = jogadas % 2 === 0 ? "X" : "O";
+        jogadas += 1;    
     }
-    if(jogadas >=5){
-        verificaGanhador()
+    if (jogadas >= 5) {
+        verificaGanhador();
+    }
+    if (jogadas === 9 && !gameOver) {
+        boxVencedor.innerHTML = "Empate!";
+        setTimeout(resetGame, 2000); // Auto-reset after a tie
     }
 }
 
 function verificaGanhador() {
-    //validando na horizontal
-    if(casinhas[0].innerHTML == casinhas[1].innerHTML && casinhas[1].innerHTML == casinhas[2].innerHTML) {
-        boxVencedor.innerHTML = "O '" + casinhas[0].innerHTML + "' Venceu!"
-    }
-    if(casinhas[3].innerHTML == casinhas[4].innerHTML && casinhas[4].innerHTML == casinhas[5].innerHTML) {
-        alert("O '" + casinhas[3].innerHTML + "' Venceu!")
-    }
-    if(casinhas[6].innerHTML == casinhas[7].innerHTML && casinhas[7].innerHTML == casinhas[8].innerHTML) {
-        alert("O '" + casinhas[6].innerHTML + "' Venceu!")
-    }
+    const combinacoesVencedoras = [
+        // Horizontal
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        // Vertical
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        // Diagonal
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
 
-    //validando na vertical
-    if(casinhas[0].innerHTML == casinhas[3].innerHTML && casinhas[3].innerHTML == casinhas[6].innerHTML) {
-        alert("O '" + casinhas[0].innerHTML + "' Venceu!")
+    for (const [a, b, c] of combinacoesVencedoras) {
+        if (casinhas[a].innerHTML && casinhas[a].innerHTML === casinhas[b].innerHTML && casinhas[a].innerHTML === casinhas[c].innerHTML) {
+            boxVencedor.innerHTML = "O '" + casinhas[a].innerHTML + "' Venceu!";
+            gameOver = true;
+            setTimeout(resetGame, 2000); // Auto-reset after a win
+            return;
+        }
     }
-    if(casinhas[1].innerHTML == casinhas[4].innerHTML && casinhas[4].innerHTML == casinhas[7].innerHTML) {
-        alert("O '" + casinhas[1].innerHTML + "' Venceu!")
-    }
-    if(casinhas[2].innerHTML == casinhas[5].innerHTML && casinhas[5].innerHTML == casinhas[8].innerHTML) {
-        alert("O '" + casinhas[2].innerHTML + "' Venceu!")
-    }
+}
 
-    //validando na vertical
-    if(casinhas[0].innerHTML == casinhas[4].innerHTML && casinhas[4].innerHTML == casinhas[8].innerHTML) {
-        alert("O '" + casinhas[0].innerHTML + "' Venceu!")
+function resetGame() {
+    jogadas = 0;
+    gameOver = false;
+    for (let i = 0; i < casinhas.length; i++) {
+        casinhas[i].innerHTML = "";
     }
-    if(casinhas[2].innerHTML == casinhas[4].innerHTML && casinhas[4].innerHTML == casinhas[6].innerHTML) {
-        alert("O '" + casinhas[2].innerHTML + "' Venceu!")
-    }
-
-    console.log(casinhas[0].innerHTML)
+    boxVencedor.innerHTML = "";
 }
